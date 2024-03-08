@@ -1,6 +1,6 @@
 <template>
     <div class="LeftSider fx-fd-col">
-      <div  @click="() => $router.push('/')" class="cursor home">系统标题待定</div>
+      <div  @click="() => $router.push('/')" class="cursor home">电子考勤表</div>
       <div class="nav">
         <el-menu
           :default-active="activeIndex"
@@ -11,12 +11,12 @@
           @close="handleClose"
           @select="handleSelect"
         > 
-          <div class="first-menu">
+          <!-- <div class="first-menu">
             <el-menu-item index="99" :key="99" @click="goPath(`/`)">
               <i class="iconfont" v-html="basePath[0].meta.icon"></i>
               <span>仪表盘</span>
             </el-menu-item>
-          </div> 
+          </div>  -->
           <el-sub-menu v-for="(item, index) in basePath"  :key="index"  :index="index.toString()" >
             <template #title>
               <i class="iconfont" v-html="item.meta.icon"></i>

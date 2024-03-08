@@ -7,9 +7,9 @@ import proxy from '../config/proxy';
 const env = import.meta.env.MODE || "development";
 // http://172.17.2.134:10010
 // https://mock.boxuegu.com/mock/3359
-// const host = env === 'mock' ? 'https://tjxt-dev.itheima.net/api' : proxy[env].host; // 如果是mock模式 就不配置host 会走本地Mock拦截
+const host = env === 'mock' ? 'https://tjxt-dev.itheima.net/api' : proxy[env].host; // 如果是mock模式 就不配置host 会走本地Mock拦截
 // const host = "http://172.17.2.134/api-test";
-const host='http://localhost:10010';
+// const host='http://localhost:10010';
 const CODE = {
   LOGIN_TIMEOUT: 1000,
   REQUEST_SUCCESS: 200,

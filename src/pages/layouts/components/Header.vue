@@ -5,12 +5,12 @@
           <!-- <img src="@/assets/wecom-temp.png" width="268" height="22" alt=""> -->
         </div>
         <div class="fx-al-ct" v-if="isToken && userInfo">
-            <img
+            <!-- <img
               class="headIcon"
               :src="userInfo.icon"
               :onerror="onerrorImg"
               alt=""
-            />
+            /> -->
             <div>{{ userInfo.name || "admin" }}</div>
           <span class="vline"></span>
           <div class="back" @click="goLogin()">退出登录
