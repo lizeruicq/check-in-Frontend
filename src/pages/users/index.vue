@@ -42,7 +42,6 @@ const add = ref()
 let title = ref("");
 let total = ref(null); //数据总条数
 let dialogFormVisible = ref(false); //谈层隐藏显示
-let dialogSucceeVisible = ref(false); //创建成功弹层显示
 let isSearch = ref(false)//是否触发了搜索按钮,用来控制没有搜索出数据和正常列表无数据的区分，显示的图片和提示语不一样
 let searchData = reactive({
   pageSize: 10,

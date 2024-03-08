@@ -181,18 +181,18 @@
       trigger: "blur",
     },
   ],
-  worklength: [
-    {
-      required: true,
-      message: "Please enter the work length",
-      trigger: "blur",
-    },
-    {
-      type: "number",
-      message: "请输入数字",
-      trigger: "blur",
-    },
-  ],
+  // worklength: [
+  //   {
+  //     required: true,
+  //     message: "Please enter the work length",
+  //     trigger: "blur",
+  //   },
+  //   {
+  //     type: "number",
+  //     message: "请输入数字",
+  //     trigger: "blur",
+  //   },
+  // ],
   }
   )
 
@@ -202,6 +202,15 @@
     props.formData.ondutytime = "09:00"
     props.formData.offdutytime = "18:00"
   })
+
+   // 关闭弹层
+   const handleClose = () => {
+    console.log(props.formData.id)
+    ruleFormRef.value.resetFields() //清空表单数据
+    nameNumVal.value = 0
+    emit("handleClose")
+  }
+
 
   watch(
   () => [props.formData.ondutytime, props.formData.offdutytime],
@@ -271,7 +280,7 @@ watchEffect(() => {
             })
             ruleFormRef.value.resetFields() //清空表单数据
             handleClose()
-            刷新列表
+            //刷新列表
             emit("getList")
     
   }
@@ -298,7 +307,7 @@ else{
             })
             ruleFormRef.value.resetFields() //清空表单数据
             handleClose()
-            刷新列表
+            //刷新列表
             emit("getList")
           }
         })
@@ -311,13 +320,7 @@ else{
       ElMessage({message: "表单提交错误，请检查填写内容!"})
     }
   }
-  // 关闭弹层
-  const handleClose = () => {
-    ruleFormRef.value.resetFields() //清空表单数据
-    nameNumVal.value = 0
-    emit("handleClose")
-  }
-
+ 
 
 
   </script>

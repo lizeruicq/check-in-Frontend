@@ -113,6 +113,7 @@ onMounted(() => {
 })
 // 关闭弹层
 const handleClose = () => {
+  console.log(props.formData.id)
   ruleFormRef.value.resetFields() //清空表单数据
   nameNumVal.value = 0
   emit("handleClose")

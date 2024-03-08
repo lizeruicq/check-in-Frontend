@@ -162,8 +162,8 @@
     const emit = defineEmits(); //子组件获取父组件事件传值
  
     const handleEdit = (row) => {
-
-        emit("handleEdit", row.id);
+       console.log(row.id)
+       emit("handleEdit", row.id);
 
         // emit的两个参数，第一个是父组件的方法名，第二个是传给父组件的参数
       
