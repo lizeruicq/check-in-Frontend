@@ -19,47 +19,48 @@
           />
         </el-form-item>
         
-        <el-form-item label="考勤类别" prop="worktype">
+        <el-form-item label="考勤类别" prop="datetype">
             <el-select
-              v-model="formData.worktype"
+              v-model="formData.datetype"
               placeholder="请选择"
             >
-            <el-option label="工作日" value="工作日"></el-option>
-            <el-option label="非工作日" value="非工作日"></el-option>
+            <!-- <el-option label="工作日" value="工作日"></el-option>
+            <el-option label="非工作日" value="非工作日"></el-option> -->
+            <el-option v-for="item in datetypes" :key="item.id" :label="item.name" :value="item.id"></el-option>
         </el-select>
         </el-form-item>
 
-        <el-form-item label="上班时间" prop="ondutyTime">
+        <el-form-item label="上班时间" prop="ondutytime">
           <el-input
-            v-model="formData.ondutyTime"
+            v-model="formData.ondutytime"
             placeholder="请输入"
           />
         </el-form-item>
 
-        <el-form-item label="下班时间" prop="offdutyTime">
+        <el-form-item label="下班时间" prop="offdutytime">
           <el-input
-            v-model="formData.offdutyTime"
+            v-model="formData.offdutytime"
             placeholder="请输入"
           />
         </el-form-item>
 
-        <el-form-item label="需求号1" prop="rdmNo1">
+        <el-form-item label="需求号1" prop="rdmno1">
           <el-input
-            v-model="formData.rdmNo1"
+            v-model="formData.rdmno1"
             placeholder="请输入"
           />
         </el-form-item>
 
-        <el-form-item label="需求号2" prop="rdmNo2">
+        <el-form-item label="需求号2" prop="rdmno2">
           <el-input
-            v-model="formData.rdmNo2"
+            v-model="formData.rdmno2"
             placeholder="请输入"
           />
         </el-form-item>
 
-        <el-form-item label="需求号3" prop="rdmNo3">
+        <el-form-item label="需求号3" prop="rdmno3">
           <el-input
-            v-model="formData.rdmNo3"
+            v-model="formData.rdmno3"
             placeholder="请输入"
           />
         </el-form-item>
@@ -84,14 +85,15 @@
     </el-dialog>
   </template>
   <script setup>
-  import { ref, reactive, nextTick, watch, onMounted } from "vue"
+  import { ref, reactive, watchEffect, watch, onMounted } from "vue"
   import { ElMessage } from "element-plus"
   // 控制字节数
 //   import { validateLength } from "@/utils/index.js"
-
+  import { useUserStore } from "@/store"
   // 接口api
-  import { editDaily, saveDaily} from "@/api/user.js"
+  import { editDaily, saveDaily} from "@/api/daily.js"
   
+  const store = useUserStore()
   // 获取父组件值、方法
   const props = defineProps({
     // 弹层隐藏显示
@@ -110,11 +112,13 @@
       default: () => ({}),
     },
   })
+  
+  const pad = (n) => (n < 10? `0${n}` : n)
   const getCurrentDate = ()=> {
       let now = new Date();
       let year = now.getFullYear();
-      let month = now.getMonth() + 1;
-      let day = now.getDate();
+      let month = pad(now.getMonth() + 1);
+      let day = pad(now.getDate());
       return year + "-" + month + "-" + day;
     }
 
@@ -125,7 +129,15 @@
   const reststart = ref(new Date(getCurrentDate() +" " + "12:30").getTime())
   const restend = ref(new Date(getCurrentDate() +" " + "13:30").getTime())
 
-  
+  const userInfo = ref({
+  username: "",
+  name: ""
+  });
+
+  const datetypes = reactive([
+  { id: 0, name: '工作日' },
+  { id: 1, name: '非工作日' },
+])
 
   // 创建数据
   const nameNumVal = ref(0) //后台用户名称字数
@@ -140,28 +152,28 @@
          message: '日期格式不正确', 
          trigger: 'blur' }
     ],
-    worktype:[
+    datetype:[
         { required: true,
           message: "请输入考勤类型为工作日/非工作日",
       trigger: "blur",
     }
   ],
 
-    ondutyTime: [
+    ondutytime: [
     {
       required: true,
       message: "Please enter the onduty time",
       trigger: "blur",
     },
   ],
-  offdutyTime: [
+  offdutytime: [
     {
       required: true,
       message: "Please enter the offduty time",
       trigger: "blur",
     },
   ],
-  rdmNo1: [
+  rdmno1: [
     {
       required: true,
       message: "请输入至少一个需求",
@@ -187,12 +199,12 @@
   // 生命周期
   onMounted(() => {
     props.formData.date = getCurrentDate()
-    props.formData.ondutyTime = "09:00"
-    props.formData.offdutyTime = "18:00"
+    props.formData.ondutytime = "09:00"
+    props.formData.offdutytime = "18:00"
   })
 
   watch(
-  () => [props.formData.ondutyTime, props.formData.offdutyTime],
+  () => [props.formData.ondutytime, props.formData.offdutytime],
   (values, oldValue) => {
     if (values[0] && values[1]) {
       let workLength=""
@@ -223,21 +235,75 @@ watch(
       const date = new Date(value)
       const day = date.getDay()
       if (day === 0 || day === 6) {
-        props.formData.worktype = "非工作日"
+        props.formData.datetype =  1
       } else {
-        props.formData.worktype = "工作日"
+        props.formData.datetype =  0
       }
     }
       
     }
 )
+watchEffect(() => {
+  userInfo.value = store.getUserInfo;
+});
+
   // ------定义方法------
   // 搜索
   const handleSubmit = async () => {
     const valid = await ruleFormRef.value.validate()
-    console.log(valid)
     if(valid)
     {
+      let data = {
+        ...props.formData,
+         username: userInfo.value.username,
+         name: userInfo.value.name
+      }
+     
+      if(props.formData.id == undefined){
+    await saveDaily(data)
+        .then((res) => {
+          if (res.code === 200) {
+            ElMessage({
+
+              message: "新增成功!",
+              type: "success",
+              showClose:false,
+            })
+            ruleFormRef.value.resetFields() //清空表单数据
+            handleClose()
+            刷新列表
+            emit("getList")
+    
+  }
+  else{
+    ElMessage({
+            message: res.data.msg,
+              type: "error",
+              showClose:false,
+      })
+    }
+  }).catch((err) => { })
+      
+}
+else{
+  // 编辑接口
+  await editDaily(data)
+        .then((res) => {
+          if (res.code === 200) {
+            ElMessage({
+
+              message: "编辑成功!",
+              type: "success",
+              showClose:false,
+            })
+            ruleFormRef.value.resetFields() //清空表单数据
+            handleClose()
+            刷新列表
+            emit("getList")
+          }
+        })
+        .catch((err) => { })
+}
 
     }
     else

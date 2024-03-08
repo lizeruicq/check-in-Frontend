@@ -9,8 +9,7 @@
     :total="total"
     @getList="getList"
     @handleEdit="handleEdit"
-        
-        ></Table>
+    ></Table>
         <div class="subHead pad-30">
             <!-- 新增 -->
             <AddButton @handleAdd="handleAdd" :text="text"></AddButton>
@@ -22,6 +21,7 @@
           :title="title"
           :formData="formData"
           :dialogFormVisible="dialogFormVisible"
+          @getList="getList"
           @handleClose="handleClose"
           @getParams="getParams"
         ></Add>
@@ -37,6 +37,7 @@
     import { queryDailyById,getDailies } from "@/api/daily";
     
     const text = ref("新增考勤");
+    const loading = ref(false);
     const add = ref()
     let title = ref("");
     let total = ref(null); //数据总条数
@@ -72,11 +73,12 @@
     .then((res) => {
       if (res.code === 200) {
         loading.value = false;
-        userData.value = res.data.list;
+        dailyData.value = res.data.list;
         total.value = res.data.total;
       }
     })
     .catch((err) => {});
+  };
 
     //获取考勤详情方法
 const getDetailData = async(id) => {
@@ -89,7 +91,6 @@ const getDetailData = async(id) => {
     .catch((err) => {});
 }
       
-    };
     // 关闭弹层
     const handleClose = () => {
       dialogFormVisible.value = false;

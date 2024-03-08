@@ -87,6 +87,7 @@ const submitForm = (formEl) => {
             const data = await getUserInfo()
             if (data.code == 200) {
               // 记录到store 并调转到首页
+              console.log(data.data)
               store.setUserInfo(data.data)
             }
             // 跳转到首页

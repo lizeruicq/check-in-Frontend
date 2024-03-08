@@ -9,21 +9,35 @@
               >
         </el-table-column>
         <el-table-column 
-        prop="type"
+        prop="username"
+              label="工号"
+              width="180"
+              align="center"
+              >
+        </el-table-column>
+        <el-table-column 
+        prop="name"
+              label="姓名"
+              width="150"
+              align="center"
+              >
+        </el-table-column>
+        <el-table-column 
+        prop="datetype"
               label="考勤类别"
               width="150"
               align="center"
               >
         </el-table-column>
         <el-table-column 
-        prop="ondutyTime"
+        prop="ondutytime"
               label="上班时间"
               width="150"
               align="center"
               >
         </el-table-column>
         <el-table-column 
-        prop="offdutyTime"
+        prop="offdutytime"
               label="下班时间"
               width="150"
               align="center"
@@ -31,7 +45,7 @@
         </el-table-column>
     
         <el-table-column 
-        prop="rdmNo1"
+        prop="rdmno1"
               label="需求号1"
               width="180"
               align="center"
@@ -39,7 +53,7 @@
         </el-table-column>
 
         <el-table-column 
-        prop="rdmNo2"
+        prop="rdmno2"
               label="需求号2"
               width="180"
               align="center"
@@ -47,7 +61,7 @@
         </el-table-column>
 
         <el-table-column 
-        prop="rdmNo3"
+        prop="rdmno3"
               label="需求号3"
               width="180"
               align="center"
@@ -113,16 +127,18 @@
       dailyData: {
         type: Array,
         default: () => [
-            {
-                date: "2024-02-20",
-                type: "工作日",
-                ondutyTime: "9:00",
-                offdutyTime: "18:00",
-                rdmNo1: "S2024022011111",
-                rdmNo2: "S2024022011111",
-                rdmNo3: "S2024022011111",
-                worklength: "1",
-            }
+            // {
+            //     date: "2024-02-20",
+            //     username:"CHN0028042",
+            //     name:"李泽睿",
+            //     datetype: "工作日",
+            //     ondutytime: "9:00",
+            //     offdutytime: "18:00",
+            //     rdmno1: "S2024022011111",
+            //     rdmno2: "S2024022011111",
+            //     rdmno3: "S2024022011111",
+            //     worklength: "1",
+            // }
         ],
       },
       // 总条数
@@ -144,17 +160,13 @@
     });
     // ------定义变量------
     const emit = defineEmits(); //子组件获取父组件事件传值
-    const statusText = ref("");
-    let pic = ref(""); //要放大的图片
-    let userId = ref(""); //
-    let userName = ref(""); //
-    let userStatus = ref(0); //
-    
+ 
     const handleEdit = (row) => {
-      if (row.status === 1) {
+
         emit("handleEdit", row.id);
+
         // emit的两个参数，第一个是父组件的方法名，第二个是传给父组件的参数
-      }
+      
     };
     // 设置每页条数
     const handleSizeChange = (val) => {

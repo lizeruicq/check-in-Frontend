@@ -57,13 +57,3 @@ request({
   data
 });
 
-//新增考勤
-export const saveDaily = (data) =>
-request({
- 
-});
-// 修改考勤
-export const editDaily = (data) =>
-request({
- 
-});
