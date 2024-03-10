@@ -9,7 +9,7 @@ import App from "./App.vue";
 // 全局样式
 import "@/style/index.scss";
 // 权限-路由拦截
-import "./permission";
+// import "./permission";
 // 数据存储、路由
 import { store } from "./store";
 import router from "./router";

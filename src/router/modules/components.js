@@ -36,6 +36,12 @@ export default[
             meta: { title: "每日考勤" },
             component: () => import("@/pages/daily/dailylist/index.vue"),
           },
+          {
+            path: "dailydetail",
+            name: "dailydetail",
+            meta: { title: "考勤详情" },
+            component: () => import("@/pages/daily/dailydetail/index.vue"),
+          },
         ],
       },
 
