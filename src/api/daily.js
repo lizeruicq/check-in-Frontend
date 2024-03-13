@@ -22,6 +22,13 @@ request({
     params
 });
 
+export const getPersonlength = (params) =>
+request({
+    url:'/ds/daily-detail/personlength',
+    method:"get",
+    params
+});
+
 export const queryDailyById = (id)=>
 request(
     {

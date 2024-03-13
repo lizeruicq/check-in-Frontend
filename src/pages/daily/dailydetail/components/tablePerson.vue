@@ -1,18 +1,33 @@
 <template>
-    <el-table :data="RdmDetailData" 
+    <el-table :data="personData" 
+    max-height="500px"
     border stripe 
     v-loading="loading"
     class="RdmDetailList">
     <el-table-column type="index" align="center" width="100" label="序号" />
         <el-table-column 
-        prop="rdmno"
-              label="需求号"
+        prop="name"
+              label="姓名"
               width="150"
               align="center"
               >
         </el-table-column>
         <el-table-column 
-        prop="length"
+        prop="username"
+              label="工号"
+              width="150"
+              align="center"
+              >
+        </el-table-column>
+        <el-table-column 
+        prop="rdmno"
+              label="需求号"
+              width="180"
+              align="center"
+              >
+        </el-table-column>
+        <el-table-column 
+        prop="sumlength"
               label="人天占用"
               width="150"
               align="center"
@@ -37,20 +52,16 @@
 
 const props = defineProps({
       // 搜索对象
-      RdmDetailData: {
+      personData: {
         type: Array,
         default: () => [
-            {
-                rdmno: 'S2024031012345',
-                length: '3.5',
-            }
            
         ],
       },
       // 总条数
       total: {
         type: Number,
-        default: 0,
+        default: 20,
       },
       // 每页的数量
       pageSize: {
