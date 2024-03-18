@@ -29,6 +29,14 @@ request({
     params
 });
 
+export const calDaily = (params) =>
+request({
+    url:'/ds/daily/cal',
+    method:"get",
+    params
+});
+
+
 export const queryDailyById = (id)=>
 request(
     {

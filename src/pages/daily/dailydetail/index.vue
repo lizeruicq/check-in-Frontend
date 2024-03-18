@@ -17,6 +17,11 @@
                 </TablePerson>
             </div>
         </div>
+
+        <div class="bg-wt radius marg-tp-20 table2">
+          <dailyCal></dailyCal>
+        </div>
+
     </div>
 </template>
 
@@ -25,6 +30,7 @@ import { ref, reactive, onMounted } from "vue";
 import TablePerson from "./components/tablePerson.vue";
 import { getPersonlength } from "@/api/daily";
 import SearchLeft from "./components/SearchLeft.vue";
+import dailyCal from "./components/dailyCal.vue";
 
 const loading = ref(false);
 let total = ref(null); //数据总条数
@@ -69,7 +75,7 @@ const init = () => {
 <style lang="scss" scoped>
 .bg-wt
 {
-    margin-right: 100px;
+    margin-right: 24px;
 }
 .table2
 {
@@ -84,7 +90,6 @@ const init = () => {
   width: 100%;
   max-width: 100%;
   margin-right: 10px;
-
 
 }
 

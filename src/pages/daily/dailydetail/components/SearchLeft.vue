@@ -1,8 +1,8 @@
 <template>
-    <div class="bg-wt radius marg-tp-20">
+    <div class="bg-wt radius">
       <div class="pad-30 searchForm">
         <el-form ref="ruleForm" :inline="true" :model="searchData">
-          <el-row :gutter="5">
+          <el-row :gutter="24">
             <!-- <el-col :span="3">
               <el-form-item label="用户姓名" prop="name">
                 <el-input
@@ -75,7 +75,7 @@
 
   <style>
   .btn {
-       /* padding-top:10px */
+       padding-top:30px
   }
   .bg-wt{
     margin-right: 0;

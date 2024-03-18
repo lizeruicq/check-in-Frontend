@@ -25,7 +25,7 @@
         <el-table-column 
         prop="datetype"
               label="考勤类别"
-              width="150"
+              width="180"
               align="center"
               >
         </el-table-column>
@@ -85,7 +85,6 @@
           >
             <template #default="scope">
               <div class="operate">
-                <!-- 禁止的时候不能触发查看和重置密码,因此按钮置灰 -->
                 <span
                   @click="handleEdit(scope.row)"
                   :class="scope.row.status === 0 ? 'textForbidden' : 'textDefault'"
