@@ -93,7 +93,7 @@ const submitForm = (formEl) => {
             // 跳转到首页
           } else {
             ElMessage({
-              message: res.data.msg,
+              message: res.msg,
               type: "error",
               showClose:false,
             })

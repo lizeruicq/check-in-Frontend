@@ -90,6 +90,12 @@ const getDetailData = async(id) => {
     .catch((err) => {});
 }
 
+// 搜索
+const handleSearch = () => {
+  isSearch.value = true//是否触发了搜索按钮
+  getList();
+};
+
 // 关闭弹层
 const handleClose = () => {
   console.log("接收到关闭对话框命令")

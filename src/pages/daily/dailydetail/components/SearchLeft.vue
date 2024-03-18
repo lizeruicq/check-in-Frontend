@@ -2,24 +2,37 @@
     <div class="bg-wt radius marg-tp-20">
       <div class="pad-30 searchForm">
         <el-form ref="ruleForm" :inline="true" :model="searchData">
-          <el-row :gutter="30">
-            <el-col :span="6">
+          <el-row :gutter="5">
+            <!-- <el-col :span="3">
               <el-form-item label="用户姓名" prop="name">
                 <el-input
                   placeholder="请输入"
                   v-model="searchData.name"
-                  clearable
-                  class="el-input"
                 />
               </el-form-item>
-            </el-col>
-            <el-col :span="6">
+            </el-col> -->
+            <el-col :span="7">
               <el-form-item label="工号" prop="username">
                 <el-input placeholder="请输入" clearable v-model="searchData.username" />
               </el-form-item>
             </el-col>
-            <el-col :span="6">
-              <div class="btn">
+            <el-col :span="7">
+              <el-form-item label="需求号" prop="rdmno">
+                <el-input placeholder="请输入" clearable v-model="searchData.rdmno" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="7">
+              <el-form-item label="起始日期" prop="startdate">
+                <el-input placeholder="请输入" clearable v-model="searchData.startdate" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="7">
+              <el-form-item label="终止日期" prop="enddate">
+                <el-input placeholder="请输入" clearable v-model="searchData.enddate" />
+              </el-form-item>
+            </el-col>
+            <!-- <el-col :span="12"> -->
+              <div class="btn" >
                 <el-button class="button primary" @click="handleSearch"
                   >搜索</el-button
                 >
@@ -27,7 +40,7 @@
                   >重置</el-button
                 >
               </div>
-            </el-col>
+            <!-- </el-col> -->
           </el-row>
         </el-form>
       </div>
@@ -59,3 +72,12 @@
     emit('getList') // 重置搜索表单后，重新获取列表，刷新列表
   };
   </script>
+
+  <style>
+  .btn {
+       /* padding-top:10px */
+  }
+  .bg-wt{
+    margin-right: 0;
+  }
+</style>

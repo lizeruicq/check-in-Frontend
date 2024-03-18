@@ -15,7 +15,7 @@
         <el-table-column 
         prop="username"
               label="工号"
-              width="150"
+              width="160"
               align="center"
               >
         </el-table-column>

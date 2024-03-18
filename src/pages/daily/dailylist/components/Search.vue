@@ -3,7 +3,7 @@
       <div class="pad-30 searchForm">
         <el-form ref="ruleForm" :inline="true" :model="searchData">
           <el-row :gutter="30">
-            <el-col :span="6">
+            <el-col :span="3">
               <el-form-item label="用户姓名" prop="name">
                 <el-input
                   placeholder="请输入"
@@ -13,9 +13,19 @@
                 />
               </el-form-item>
             </el-col>
-            <el-col :span="6">
+            <el-col :span="3">
               <el-form-item label="工号" prop="username">
                 <el-input placeholder="请输入" clearable v-model="searchData.username" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
+              <el-form-item label="需求号" prop="rdmno">
+                <el-input placeholder="请输入" clearable v-model="searchData.rdmno" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
+              <el-form-item label="日期" prop="date">
+                <el-input placeholder="请输入" clearable v-model="searchData.date" />
               </el-form-item>
             </el-col>
             <el-col :span="6">

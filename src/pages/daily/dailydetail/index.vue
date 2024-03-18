@@ -1,6 +1,12 @@
 <template>
+ 
     <div class="contentBox">
+      
         <div class="bg-wt radius marg-tp-20 table2">
+          <SearchLeft :searchData="searchData"
+       @handleSearch="handleSearch" 
+       @getList="getList"
+       ></SearchLeft>
             <div class="tableBox">
                 <TablePerson
                 :loading="loading"
@@ -18,6 +24,7 @@
 import { ref, reactive, onMounted } from "vue";
 import TablePerson from "./components/tablePerson.vue";
 import { getPersonlength } from "@/api/daily";
+import SearchLeft from "./components/SearchLeft.vue";
 
 const loading = ref(false);
 let total = ref(null); //数据总条数
@@ -50,7 +57,11 @@ const init = () => {
       }
     })
     .catch((err) => {});
-  };    
+  }; 
+  const handleSearch = () => {
+  isSearch.value = true//是否触发了搜索按钮
+  getList();
+};   
 
 
 </script>
@@ -77,4 +88,4 @@ const init = () => {
 
 }
 
-</style>
+</style>./components/SearchLeft.vue

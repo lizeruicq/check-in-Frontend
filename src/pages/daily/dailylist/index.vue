@@ -1,7 +1,9 @@
 <template>
     <div class="contentBox">
-        <!-- <Search :searchData="searchData" @handleSearch="handleSearch" @getList="getList"></Search> -->
-        <div class="bg-wt radius marg-tp-20">
+      <Search :searchData="searchData" 
+      @handleSearch="handleSearch" 
+      @getList="getList"></Search>
+       <div class="bg-wt radius marg-tp-20">
           <div class="tableBox">
         <Table
         :loading="loading"
@@ -30,7 +32,7 @@
     </template>
     <script setup>
     import { ref, reactive, onMounted } from "vue";
-    // import Search from "./components/Search.vue";
+    import Search from "./components/Search.vue";
     import Table from "./components/table.vue";
     import Add from "./components/add.vue";
     import AddButton from "@/components/AddButton/index.vue";
@@ -90,6 +92,11 @@ const getDetailData = async(id) => {
     })
     .catch((err) => {});
 }
+
+const handleSearch = () => {
+  isSearch.value = true//是否触发了搜索按钮
+  getList();
+};
       
     // 关闭弹层
     const handleClose = () => {

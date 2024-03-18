@@ -72,6 +72,13 @@
           />
         </el-form-item>
 
+        <el-form-item label="备注说明" prop="note">
+          <el-input
+            v-model="formData.note"
+            placeholder="加班原因/特殊时段加班等"
+          />
+        </el-form-item>
+
       </el-form>
 
       <template #footer>
@@ -135,8 +142,9 @@
   });
 
   const datetypes = reactive([
-  { id: 0, name: '工作日' },
-  { id: 1, name: '非工作日' },
+  { id: 0, name: '工作日上班/加班' },
+  { id: 1, name: '非工作日加班' },
+  { id: 2, name: '请假/调休' },
 ])
 
   // 创建数据
@@ -271,6 +279,7 @@ watchEffect(() => {
       if(props.formData.id == undefined){
     await saveDaily(data)
         .then((res) => {
+          console.log(res.code)
           if (res.code === 200) {
             ElMessage({
 
@@ -284,9 +293,10 @@ watchEffect(() => {
             emit("getList")
     
   }
+
   else{
     ElMessage({
-            message: res.data.msg,
+            message: res.msg,
               type: "error",
               showClose:false,
       })
