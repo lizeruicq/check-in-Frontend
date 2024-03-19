@@ -63,12 +63,12 @@
               :class="scope.row.status === 0 ? 'textForbidden' : 'textDefault'"
               >编辑</span
             >
-            <span
+            <!-- <span
               @click="handleOpenStatus(scope.row)"
               :class="scope.row.status === 0 ? 'textDefault' : 'textWarning'"
             >
               {{ scope.row.status === 1 ? "禁用" : "启用" }}
-            </span>
+            </span> -->
             <span
               @click="handleResetPwd(scope.row)"
               :class="scope.row.status === 0 ? 'textForbidden' : 'textDefault'"
@@ -162,6 +162,12 @@ const handleEdit = (row) => {
     // emit的两个参数，第一个是父组件的方法名，第二个是传给父组件的参数
   }
 };
+
+const handleResetPwd =  (row) => {
+  console.log(row.status,row.id)
+  emit("handleResetPwd", row.id);
+};
+
 // 设置每页条数
 const handleSizeChange = (val) => {
   emit("handleSizeChange", val);

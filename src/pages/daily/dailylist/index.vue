@@ -11,6 +11,7 @@
     :total="total"
     @getList="getList"
     @handleEdit="handleEdit"
+    @handleDelete="handleDelete"
     ></Table>
         <div class="subHead pad-30">
             <!-- 新增 -->
@@ -36,7 +37,8 @@
     import Table from "./components/table.vue";
     import Add from "./components/add.vue";
     import AddButton from "@/components/AddButton/index.vue";
-    import { queryDailyById,getDailies } from "@/api/daily";
+    import { queryDailyById,getDailies,deleteDaily } from "@/api/daily";
+    import { ElMessage } from "element-plus"
     
     const text = ref("新增考勤");
     const loading = ref(false);
@@ -90,6 +92,31 @@ const getDetailData = async(id) => {
         formData.value = res.data;
       }
     })
+    .catch((err) => {});
+}
+
+const handleDelete = async(id) => {
+  loading.value = true;
+  await deleteDaily(id)
+    .then((res) => {
+      if (res.code === 200) {
+        loading.value = false;
+      getList();
+      ElMessage({
+      message: "删除成功!",
+      type: "success",
+      showClose:false,
+      })
+      }
+      else
+      {
+        ElMessage({
+            message: res.msg,
+              type: "error",
+              showClose:false,
+      })
+    } 
+  })
     .catch((err) => {});
 }
 

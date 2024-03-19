@@ -9,6 +9,7 @@
     :total="total"
     @getList="getList"
     @handleEdit="handleEdit"
+    @handleResetPwd = "handleResetPwd"
     ></Table>
     <div class="subHead pad-30">
         <!-- 新增 -->
@@ -34,7 +35,8 @@ import Search from "./components/Search.vue";
 import Table from "./components/table.vue";
 import Add from "./components/add.vue";
 import AddButton from "@/components/AddButton/index.vue";
-import { queryUserById,getUsers } from "@/api/user";
+import { queryUserById,getUsers,pwdReset } from "@/api/user";
+import { ElMessage } from "element-plus";
 
 const text = ref("新增用户");
 const loading = ref(false);
@@ -112,6 +114,27 @@ const handleEdit = (val) => {
   dialogFormVisible.value = true;
   getDetailData(val);
 
+}
+
+const handleResetPwd = async(id) => {
+  await pwdReset(id)
+    .then((res) => {
+      if (res.code === 200) {
+        ElMessage({
+            message:"密码已重置",
+              type: "success",
+              showClose:false,
+      })
+      }
+      else{
+        ElMessage({
+            message:res.msg,
+              type: "error",
+              showClose:false,
+            })
+    } 
+  })
+  .catch((err) => {});
 }
 
 </script>

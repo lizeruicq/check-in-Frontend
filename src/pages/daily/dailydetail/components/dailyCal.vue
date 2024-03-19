@@ -71,6 +71,7 @@
 <script setup>
 import { ref,reactive } from 'vue';
 import {calDaily} from "@/api/daily";
+import { ElMessage } from "element-plus"
 
 const dailyCalRef = ref(); //定义搜索表单的ref
 const loading = ref(false);
@@ -118,10 +119,18 @@ const clearresult = ()=>{
       {
         if (res.code === 200) {
           loading.value = false;
+          {
+        ElMessage({
+            message: "计算完成",
+            type: "success",
+              
+      })
+    }
           dailyCalRe = Object.assign(dailyCalRe, res.data);
       }
       else
       {
+        loading.value = false;
         ElMessage({
             message: res.msg,
               type: "error",

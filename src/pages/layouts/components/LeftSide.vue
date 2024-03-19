@@ -158,5 +158,9 @@ const basePath = getMenuList(routers)
   //   height: 168px;
   // }
   }
-  
+  .cursor
+  {
+    text-align: center;
+    font-size: 18px;
+  }
 </style>

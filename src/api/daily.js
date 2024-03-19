@@ -44,3 +44,11 @@ request(
         method:"get",
     }
 )
+
+export const deleteDaily = (id)=>
+request(
+    {
+        url:`/ds/daily/${id}`,
+        method:"delete",
+    }
+)

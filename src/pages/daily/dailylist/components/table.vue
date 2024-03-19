@@ -163,9 +163,10 @@
     const handleEdit = (row) => {
        console.log(row.id)
        emit("handleEdit", row.id);
-
-        // emit的两个参数，第一个是父组件的方法名，第二个是传给父组件的参数
-      
+    };
+    const handleDelete = (row) => {
+       console.log(row.id)
+       emit("handleDelete", row.id);
     };
     // 设置每页条数
     const handleSizeChange = (val) => {
@@ -175,4 +176,6 @@
     const handleCurrentChange = (val) => {
       emit("handleCurrentChange", val);
     };
+
+    
     </script>
