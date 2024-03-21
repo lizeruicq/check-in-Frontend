@@ -162,5 +162,6 @@ const basePath = getMenuList(routers)
   {
     text-align: center;
     font-size: 18px;
+    margin: 12px;
   }
 </style>

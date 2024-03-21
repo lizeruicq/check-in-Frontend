@@ -28,7 +28,7 @@ export default[
         component: Layout,
         redirect: "/daily/dailylist",
         name: "daily",
-        meta: { title: "每日考勤", icon: '&#xe610;' },
+        meta: { title: "考勤管理", icon: '&#xe610;' },
         children: [
           {
             path: "dailylist",

@@ -135,7 +135,7 @@
   const ruleFormRef = ref() //表单校验ref
   const reststart = ref(new Date(getCurrentDate() +" " + "12:30").getTime())
   const restend = ref(new Date(getCurrentDate() +" " + "13:30").getTime())
-  const otstart = ref(new Date(getCurrentDate() +" " + "20:00").getTime())
+  // const otstart = ref(new Date(getCurrentDate() +" " + "20:00").getTime())
 
   const userInfo = ref({
   username: "",
@@ -232,12 +232,12 @@
       let morninglength = (reststart.value - new Date(props.formData.date +" " + values[0]).
       getTime())/ (1000 * 60 * 60 * 8 );
 
-      let afternoonlength = (new Date(props.formData.date +" " + "18:00").
+      let afternoonlength = (new Date(props.formData.date +" " + values[1]).
       getTime() - restend.value)/ (1000 * 60 * 60 * 8);
 
-      let otlength = (new Date(props.formData.date +" " + values[1]).
-      getTime() - otstart.value)/ (1000 * 60 * 60 * 8);
-      if(otlength<=0){otlength = 0}
+      // let otlength = (new Date(props.formData.date +" " + values[1]).
+      // getTime() - otstart.value)/ (1000 * 60 * 60 * 8);
+      // if(otlength<=0){otlength = 0}
   
       
       
@@ -248,10 +248,9 @@
       (new Date(props.formData.date +" " + values[1]).getTime()
       -
       new Date(props.formData.date +" " + values[0]).getTime())/ (1000 * 60 * 60 * 8);
-
       }
       else{
-         workLength = morninglength + afternoonlength + otlength;
+         workLength = morninglength + afternoonlength;
         //  if (workLength >1)
         //  {workLength = 1}
         //  workLength=workLength + otlength;
